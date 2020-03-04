@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { createStore } from "redux";
+import { createStore, bindActionCreators } from "redux";
 import { connect, Provider } from "react-redux";
 
 // initial state
@@ -64,13 +64,38 @@ class Counter extends Component {
 
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(incrementValue()),
-  decrement: () => dispatch(decrementValue()),
-  reset: () => dispatch(resetValue())
-});
+// const mapDispatchToProps = dispatch => ({
+//   increment: () => dispatch(incrementValue()),
+//   decrement: () => dispatch(decrementValue()),
+//   reset: () => dispatch(resetValue())
+// });
+
+// OR
+
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators(
+//     {
+//       incrementValue,
+//       decrementValue,
+//       resetValue
+//     },
+//     dispatch
+//   );
+// };
+
+// OR if you don't need to pass data trough
+
+const mapDispatchToProps = {
+  incrementValue,
+  decrementValue,
+  resetValue
+};
 
 const CounterContainer = connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+// variations
+// const CounterContainer = connect(null, mapDispatchToProps)(Counter);
+// const CounterContainer = connect(mapStateToProps)(Counter);
 
 // you need index.html
 // hooking up to redux store with Provider
