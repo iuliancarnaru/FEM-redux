@@ -1,3 +1,3 @@
 # FEM-redux
 
-## Practicing redux
+## Practicing redux and async JS
